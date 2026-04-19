@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="style.css">
+     
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>Responsive Regisration Form </title> 
+</head>
+<body>
+    <div class="container">
+        <header>Registration Form</header>
+
+        <form action="VoterRegistration.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <div class="details personal">
+                    <span class="title" style="color: green;">Personal Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Full Name <span style="color: red;">*</span></label>
+                            <input type="text" placeholder="Enter your name" name="name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Date of Birth <span style="color: red;">*</span></label>
+                            <input type="date" placeholder="Enter birth date" name="dob" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Email <span style="color: gray; font-size:10px;">(option)</span></label>
+                            <input type="text" placeholder="Enter your email" name="email" >
+                        </div>
+
+                        <div class="input-field">
+                            <label>Mobile Number <span style="color: red;">*</span></label>
+                            <input type="text" placeholder="Enter mobile number" name="mobile" maxlength="10"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                             <span id="mobileError" style="color:red; font-size:12px;"></span>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Gender <span style="color: red;">*</span></label>
+                            <select required name="gender">
+                                <option disabled selected>Select gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Upload Your Image  <span style="color: red;">*</span></label>
+                            <input type="file"  required name="photo">
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="details ID">
+                    <span class="title" style="color: green;">Identity Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>ID Type <span style="color: gray; font-size:10px;">(option)</span></label>
+                            <input type="text" placeholder="Enter ID type" name="idtype" >
+                        </div>
+
+                        <div class="input-field">
+                            <label>Adhar Number <span style="color: red;">*</span></label>
+                            <input type="text" placeholder="Enter Aadhaar number" name="adhar" maxlength="12"
+                               oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                            <span id="aadhaarError" style="color:red; font-size:12px;"></span>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Issued Date <span style="color: red;">*</span></label>
+                            <input type="date" placeholder="Enter your issued date" name="issue" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Expiry Date <span style="color: gray; font-size:10px;">(option)</span></label>
+                            <input type="date" placeholder="Enter expiry date" name="expire" >
+                        </div>
+
+                      <div class="input-field">
+                                <label>Create Password <span style="color: red;">*</span></label>
+                                <input type="password" placeholder="Create Password" name="pass" required>
+                            </div>
+
+                            <div class="input-field">
+                                <label>Confirm Password <span style="color: red;">*</span></label>
+                                <input type="password" placeholder="Confirm Password" name="cpass" required>
+                                <span id="passError" style="color:red; font-size:12px;"></span>
+                            </div>
+                    </div>
+
+                    <button class="submit" type="submit">
+                        <span class="btnText">Submit</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                    <div style="text-align:center; margin-top:15px;">
+                        <p>Already registered? 
+                            <a href="../Voter login Form/login.html" style="color:blue; font-weight:bold;">
+                                Login here
+                            </a>
+                        </p>
+                    </div>
+                </div> 
+            </div>
+
+           
+
+                    
+
+   <script>
+<script>
+function validateForm() {
+
+    let name = document.querySelector('input[name="name"]').value.trim();
+    let dob = document.querySelector('input[name="dob"]').value;
+    let mobile = document.querySelector('input[name="mobile"]').value.trim();
+    let aadhaar = document.querySelector('input[name="adhar"]').value.trim();
+
+    let pass = document.querySelector('input[name="pass"]').value;
+    let cpass = document.querySelector('input[name="cpass"]').value;
+
+    let mobileError = document.getElementById("mobileError");
+    let aadhaarError = document.getElementById("aadhaarError");
+    let passError = document.getElementById("passError");
+
+    mobileError.innerText = "";
+    aadhaarError.innerText = "";
+    passError.innerText = "";
+
+    // Name validation
+    let namePattern = /^[A-Za-z\s]+$/;
+    if (!namePattern.test(name)) {
+        alert("Name should contain only letters");
+        return false;
+    }
+
+    // Age validation
+    let birthDate = new Date(dob);
+    let today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if (age < 18) {
+        alert("You must be 18+");
+        return false;
+    }
+
+    // Mobile validation
+    if (mobile.length !== 10) {
+        mobileError.innerText = "Enter valid 10-digit mobile number";
+        return false;
+    }
+
+    // Aadhaar validation
+    if (aadhaar.length !== 12) {
+        aadhaarError.innerText = "Enter valid 12-digit Aadhaar number";
+        return false;
+    }
+
+    // ✅ PASSWORD CHECK (NO TRIM ISSUE NOW)
+    if (pass === "" || cpass === "") {
+        passError.innerText = "Password cannot be empty";
+        return false;
+    }
+
+    if (pass !== cpass) {
+        passError.innerText = "❌ Password does not match";
+        return false;
+    }
+
+    return true;
+}
+
+// 🔥 LIVE MATCH CHECK
+function checkPassMatch() {
+    let pass = document.querySelector('input[name="pass"]').value;
+    let cpass = document.querySelector('input[name="cpass"]').value;
+    let passError = document.getElementById("passError");
+
+    if (cpass === "") {
+        passError.innerText = "";
+        return;
+    }
+
+    if (pass === cpass) {
+        passError.style.color = "green";
+        passError.innerText = "✅ Password matched";
+    } else {
+        passError.style.color = "red";
+        passError.innerText = "❌ Password not match";
+    }
+}
+</script>
+</script>
+</body>
+</html>

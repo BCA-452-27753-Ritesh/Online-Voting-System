@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background: #E0FFFF;
+        }
+        .login-box {
+            background-color: #f0f8ff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+        }
+        .title {
+            color: red;
+            font-weight: bold;
+        }
+        .subtitle {
+            color: green;
+        }
+        .extra-links a {
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .extra-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container" style="padding-top: 80px;">
+    <div class="row justify-content-center">
+
+        <div class="col-md-5 login-box">
+
+            <h2 class="text-center title">Admin Login Form</h2>
+            <p class="text-center subtitle">Please enter your information to proceed</p>
+            <hr><br>
+
+            <!-- 🔐 LOGIN FORM -->
+            <form action="Adminlogin.php" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" required>
+                </div>
+
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+
+                <div class="input-group">
+                    <input type="password" class="form-control" name="password" id="password" required>
+
+                    <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()">
+                        <i id="eyeIcon" class="bi bi-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" name="remember">
+                    <label class="form-check-label">Remember me</label>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+
+            </form>
+
+            <br>
+
+            <!-- 🔗 EXTRA LINKS -->
+            <div class="d-flex justify-content-between extra-links">
+                <a href="#">Forgot Password?</a>
+             <a href="http://localhost/Online%20Voting%20System/Voter%20login%20Form/login.html">User Login</a>
+            </div>
+
+            <div class="text-center mt-2 extra-links">
+                <a href="http://localhost/Online%20Voting%20System/voter_registration/index.html">
+                    New user? Register here
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- 👇 JS for show/hide password -->
+<script>
+function togglePassword() {
+    var pass = document.getElementById("password");
+    var icon = document.getElementById("eyeIcon");
+
+    if (pass.type === "password") {
+        pass.type = "text";
+        icon.classList.replace("bi-eye", "bi-eye-slash");
+    } else {
+        pass.type = "password";
+        icon.classList.replace("bi-eye-slash", "bi-eye");
+    }
+}
+</script>
+
+</body>
+</html>
